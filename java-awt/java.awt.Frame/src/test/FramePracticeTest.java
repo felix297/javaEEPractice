@@ -4,11 +4,11 @@ import java.util.Scanner;
 import com.company.FelixFrame;
 import org.junit.jupiter.api.Test;
 
-public class FramePractice{
+public class FramePracticeTest {
     @Test
     public void framePracticeTest () {
         new FelixFrame().getFrame();
 
-        new Scanner(System.in).next();
+        new Scanner(System.in).next();// 防止窗口一闪而过
     }
 }

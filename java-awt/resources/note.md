@@ -1,27 +1,139 @@
-# AWT
+# java GUI
 
-## 创建窗口
+- 这是什么
+- 他怎么玩
+- 该如何去在我们平时运用？
+- 组件
+  - 窗口
+  - 弹窗
+  - 面板
+  - 文本框
+  - 列表框
+  - 按钮
+  - 图片
+  - 监听事件
+  - 鼠标
+  - 键盘事件
+  - 破解工具
 
-java.awt.Frame类，自己去看这个类就行了。
+做完就可以用来做外挂
+
+## 简介
+
+Gui的核心技术： Swing  AWT  是GUI的核心编程工具，现在不流行，因为不美观，还需要我们的jre环境! 太大了!
+
+为什么我们要学习，因为他是MVC的基础，可以写出自己心中想要的小工具，工作的时候也可能维护到swing界面，概率极小，主要是为了了解MVC架构，了解监听!
+
+## AWT
+
+abstract windows toolkit
+
+包含了很多类和接口
+
+<img src="pic/awtComponent.png" alt="component of awt frameword" width=300 />
+
+### 创建窗口
+
+`java.awt.Frame` 类
+
+属于 `Container`
+
+`Frame` 是顶级窗口（是一个独立的窗口，它不是其他窗口的子窗口。顶级窗口可以独立存在，不依赖于其他窗口。它有自己的标题和边框，可以被用户直接看到和操作）
+
+**Constructor**
+
+1. 空参构造
+2. `Frame(String title)` 
+
+    `title` 为窗口名
+
+**Method**
+1. `setBounds()` 
+1. `setBackground()` 
+1. `setResizable()` 
+1. `setLayout()` 
+1. `addWindowListener()` 
+1. `add(Component component)` 
+1. `setVisible()`
 
 **注意**
 
-1. setBounds() 等效于 setLocation() + setSize();
+1. 创建一个窗口的时候，要调用 `setResizable()`、 `setLayout()`、 `setBounds()` 、`setBackground()`、`addWindowEvent()`、`setVisible()`
+1. `setLayout()` 影响的是容器里面的东西，而不是容器本身
+1. `setVisible()` 方法的使用顺序确实很重要:
+    - **在添加所有组件后调用**：`setVisible(true)` 会导致窗口及其所有子组件被绘制。如果在调用 `setVisible(true)` 后添加组件，可能需要额外的步骤（如调用 `validate()` 和 `repaint()`）来确保新添加的组件被正确绘制。
+    - **在设置布局和大小后调用**：布局管理器和窗口大小会影响组件的位置和大小。
+    - **在 setUndecorated() 之前调用**：当使用 `setUndecorated()` 方法来移除窗口的装饰（如标题栏），在调用 `setVisible(true)` 之前调用 `setUndecorated(true)`。一旦窗口变为可见，就不能更改其装饰状态。
+    - **在 dispose() 之后调用**：调用了 `dispose()` 来释放窗口的资源，通过调用 `setVisible(true)` 来重新创建窗口和其资源。
+1. `setBounds()` 等效于 `setLocation()` + `setSize()`;
+1. 要使用 `setBounds()` ，请将`frame.setLayout(null)`， 如果您使用各种布局，则 `setBounds()` 将不起作用
 
+### 布局管理器
+
+**FlowLayout**
+
+```java
+Frame frame = new Frame();
+frame.setLayout(new FlowLayout(FlowLayout.***));
+```
+
+**BorderLayout**
+```java
+Frame frame = new Frame();
+frame.setLayout(new BorderLayout());
+
+frame.add(component, BorderLayout.***);
+```
+
+**GridLayout**
+```java
+Frame frame = new Frame();
+frame.setLayout(new GridLayout(int row, int column));
+
+frame.add(component)
+frame.add(component)
+frame.add(component)
+```
+
+**注意事项**
+1. 给一个容器设置了布局之后，就不能使用 `setBounds()`, `setLocation()`, `setSize()`
+2. 使用 `BorderLayout`要在容器调用 `add()` 方法的时候使用
+1. `BorderLayout`，如果只给了一个 `NORTH`，那就就是 `NORTH` 会被沾满，但是别的地方是没被使用的，就是是一个大块的状态，如果要使用也只能通过`BorderLayout`
+3. 使用 `GridLayout` 要在 `new` `GridLayout` 的时候设置好行列数，添加的时候就不用指定在哪行哪列，默认从左到右，从上到下添加
+4. 所以一个容器如果被设置了 `BorderLayout`，最多只能往里面放五个组件吗？
+    
+    不完全是这样的。虽然 BorderLayout 将容器划分为五个区域（北、南、东、西和中心），并且每个区域默认只能添加一个组件，但是您可以通过在一个区域中添加一个容器（如 Panel 或 JPanel），然后在这个容器中添加多个组件，从而在一个区域中放置多个组件。
 ## 创建面板
-java.awt.Pannel类
+
+`java.awt.Pannel` 类
 
 面板是内嵌在窗口的一个东西，所以是Frame对象.add(Pannel对象)
 
 面板的坐标是相对于Frame对象的坐标
 
-frame.addWindowListener();
+**注意事项**
+1. `panel` 是中间层窗口，不能独立存在，必须添加到其他窗口使用
+1. 记得给 `panel` 设置一个颜色，不然就是 `frame` 的颜色，这样你看不出来你的 `panel` 在哪
+2. `setBounds()` 的坐标相对的包括了程序的边框大小。非常非常重要的一点！！！！你用 `setBounds` 手动调坐标的时候，图形界面的顶部边框的宽度也是包括在坐标内的，也就是给 `frame` 加容器的时候，记得 `y` 坐标给加上边框的宽度，因为相对坐标也是从最右上角的点算的。另外一点就是，当你觉得你的代码，布局啥的都 ok 的时候，还是得不到想要的结果的时候，可以慢慢的调一调组件的位置和大小（建议把组件调到刚好可以显示标签的大小，就可以去动位置，看看是不是位置的问题了）
 
-添加窗口监听事件：
+## 布局管理器
 
-frame.addWindowListener();
+有三种布局管理器：FlowLayout、BorderLayout、GridLayout
 
-调用System.exit(0);
+使用：
+
+1.FlowLayout
+
+```java
+Frame frame = new Frame();
+
+frame.se
+```
+
+
+
+一个frame设置了布局管理器，和一个panel设置了布局管理器，会产生冲突是吗？那正确的做法是什么呢？
+
 
 ## 按钮
 
