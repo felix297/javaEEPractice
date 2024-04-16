@@ -132,15 +132,25 @@ Button button = new Button(String title);
 
 `button.addActionListener()` 方法
 
-## 文本框监听
+## TextField 文本框
 
-文本框：java.awt.TextField
+`java.awt.TextField` 类
 
-文本框监听：textField.addActionListener()
+**事件监听**
 
-addActionListener()里面传入的对象实现的方法是：e.getSource()，然后强转型，操作textField对象
+`addActionListener()` 方法
 
-### 练习：简易计算器，并且分别使用组合类和内部类进行代码优化
+`addActionListener()` 里面传入的对象实现的方法是： `e.getSource()` ，然后强转型，操作   `textField` 对象
+
+**注意事项**
+1. 一新建一个 `textField` 对象，就要使用 `setEchoChar()` 方法。
+2. `addActionListener()` 传入的对象的实现：
+
+    使用 `ActionEvent` 对象 `e` 的 `getSource()` 方法得到 `textField` 的 `Object` 对象，进行强制类型转换，调用 `textField` 的 `getText()` 方法可以得到输入在文本框的内容。
+
+## 练习
+
+简易计算器，并且分别使用组合类和内部类进行代码优化
 
 有个Label类，也可以add到frame里面去
 
@@ -192,9 +202,6 @@ JFrame 类
 
 然后，要在 JFrame 里面放东西，都是放在 Container 里面，如 button, label 等等 
 
-### 绝对定位
-
-绝对定位：给定坐标之后是定死的，你给窗口缩放，如 button 的大小是不会发生变化的（Frame的时候是会跟着一起缩放的）
 
 ## Dialog 对话窗口（弹窗）
 
