@@ -128,9 +128,9 @@ frame.add(component)
 Button button = new Button(String title);
 ```
 
-## 事件监听
+**事件监听**
 
-button.addActionListener
+`button.addActionListener()` 方法
 
 ## 文本框监听
 

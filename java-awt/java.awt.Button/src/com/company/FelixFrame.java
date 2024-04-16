@@ -10,7 +10,7 @@ public class FelixFrame extends Frame {
     public FelixFrame (String title) {
         super(title);
         setBounds(100, 100, 500, 500);
-        setBackground(new Color(22, 27, 34));
+        setBackground(Color.darkGray);
         setResizable(false);
         addWindowListener(new FelixWindowAdapter());
     }
