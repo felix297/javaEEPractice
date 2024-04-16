@@ -32,7 +32,7 @@ abstract windows toolkit
 
 <img src="pic/awtComponent.png" alt="component of awt frameword" width=300 />
 
-### 创建窗口
+### `Frame` 窗口
 
 `java.awt.Frame` 类
 
@@ -58,7 +58,7 @@ abstract windows toolkit
 
 **注意**
 
-1. 创建一个窗口的时候，要调用 `setResizable()`、 `setLayout()`、 `setBounds()` 、`setBackground()`、`addWindowEvent()`、`setVisible()`
+1. 创建一个窗口的时候，要调用 `setResizable()`、 `setLayout()`、 `setBounds()` 、`setBackground()`、`addWindowListener()`、`setVisible()`
 1. `setLayout()` 影响的是容器里面的东西，而不是容器本身
 1. `setVisible()` 方法的使用顺序确实很重要:
     - **在添加所有组件后调用**：`setVisible(true)` 会导致窗口及其所有子组件被绘制。如果在调用 `setVisible(true)` 后添加组件，可能需要额外的步骤（如调用 `validate()` 和 `repaint()`）来确保新添加的组件被正确绘制。
@@ -103,7 +103,7 @@ frame.add(component)
 4. 所以一个容器如果被设置了 `BorderLayout`，最多只能往里面放五个组件吗？
     
     不完全是这样的。虽然 BorderLayout 将容器划分为五个区域（北、南、东、西和中心），并且每个区域默认只能添加一个组件，但是您可以通过在一个区域中添加一个容器（如 Panel 或 JPanel），然后在这个容器中添加多个组件，从而在一个区域中放置多个组件。
-## 创建面板
+## `Panel` 面板
 
 `java.awt.Pannel` 类
 
@@ -115,39 +115,13 @@ frame.add(component)
 1. `panel` 是中间层窗口，不能独立存在，必须添加到其他窗口使用
 1. 记得给 `panel` 设置一个颜色，不然就是 `frame` 的颜色，这样你看不出来你的 `panel` 在哪
 2. `setBounds()` 的坐标相对的包括了程序的边框大小。非常非常重要的一点！！！！你用 `setBounds` 手动调坐标的时候，图形界面的顶部边框的宽度也是包括在坐标内的，也就是给 `frame` 加容器的时候，记得 `y` 坐标给加上边框的宽度，因为相对坐标也是从最右上角的点算的。另外一点就是，当你觉得你的代码，布局啥的都 ok 的时候，还是得不到想要的结果的时候，可以慢慢的调一调组件的位置和大小（建议把组件调到刚好可以显示标签的大小，就可以去动位置，看看是不是位置的问题了）
+3. 很重要的一点还有：`panel` 里面的组件的 `setBounds()` 的时候的坐标也是相对 `frame` 的左上角的坐标！
+5. `setBounds()` 的前两个参数，是指当前容器或组件，左上角坐标相对于 `frame` 左上角坐标差多少。
 
-## 布局管理器
+### `Button` 按钮
 
-有三种布局管理器：FlowLayout、BorderLayout、GridLayout
+`java.awt.Button` 类
 
-使用：
-
-1.FlowLayout
-
-```java
-Frame frame = new Frame();
-
-frame.se
-```
-
-
-
-一个frame设置了布局管理器，和一个panel设置了布局管理器，会产生冲突是吗？那正确的做法是什么呢？
-
-
-## 按钮
-
-java.awt.Button类
-
-要添加多个按钮，先设置好Frame对象的布局（有三种布局）
-
-frame.setLayout();
-
-里面需要传入一个layout：流式布局：FlowLayout；东西南北中布局：BorderLayout；表格布局：GridLayout
-
-用上面这几个类，然后你在一个软件的界面里面看到的是多种布局的嵌套使用。
-
-然后再add
 
 ## 事件监听
 
