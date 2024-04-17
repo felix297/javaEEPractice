@@ -1,4 +1,4 @@
-package com.company;
+package test;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -7,6 +7,8 @@ import java.awt.TextField;
 import java.awt.Panel;
 import java.awt.FlowLayout;
 import java.awt.Color;
+
+import com.company.FelixFrame;
 import org.junit.jupiter.api.Test;
 import java.util.Scanner;
 
