@@ -55,10 +55,18 @@ abstract windows toolkit
 1. `addWindowListener()` 
 1. `add(Component component)` 
 1. `setVisible()`
+1. `setFont()`
 
 **注意**
 
-1. 创建一个窗口的时候，要调用 `setResizable()`、 `setLayout()`、 `setBounds()` 、`setBackground()`、`addWindowListener()`、`setVisible()`
+1. 创建一个窗口的时候，要调用
+    - `setResizable()`
+    - `setLayout()`
+    - `setBounds()` 
+    - `setBackground()`
+    - `addWindowListener()`
+    - `setVisible()`
+    - `setFont()`
 1. `setLayout()` 影响的是容器里面的东西，而不是容器本身
 1. `setVisible()` 方法的使用顺序确实很重要:
     - **在添加所有组件后调用**：`setVisible(true)` 会导致窗口及其所有子组件被绘制。如果在调用 `setVisible(true)` 后添加组件，可能需要额外的步骤（如调用 `validate()` 和 `repaint()`）来确保新添加的组件被正确绘制。
@@ -111,8 +119,17 @@ frame.add(component)
 
 面板的坐标是相对于Frame对象的坐标
 
+**方法**
+1. `setBackground()`
+2. `setLayout()`
+3. `setBounds()`
+3. `add()`
+
 **注意事项**
-1. 每 `new` 一个 `panel` 记得都要使用方法：`setBackground()`、`setLayout()`、`setBounds()` 方法
+1. 每 `new` 一个 `panel` 记得都要使用方法：
+    - `setBackground()`
+    - `setLayout()`
+    - `setBounds()`
 1. `panel` 是中间层窗口，不能独立存在，必须添加到其他窗口使用
 1. 记得给 `panel` 设置一个颜色，不然就是 `frame` 的颜色，这样你看不出来你的 `panel` 在哪
 2. `setBounds()` 的坐标相对的包括了程序的边框大小。非常非常重要的一点！！！！你用 `setBounds` 手动调坐标的时候，图形界面的顶部边框的宽度也是包括在坐标内的，也就是给 `frame` 加容器的时候，记得 `y` 坐标给加上边框的宽度，因为相对坐标也是从最右上角的点算的。另外一点就是，当你觉得你的代码，布局啥的都 ok 的时候，还是得不到想要的结果的时候，可以慢慢的调一调组件的位置和大小（建议把组件调到刚好可以显示标签的大小，就可以去动位置，看看是不是位置的问题了）
@@ -128,13 +145,25 @@ frame.add(component)
 Button button = new Button(String title);
 ```
 
+**方法**
+1. `setBackground()`
+2. `setForeground()`
+
+**注意事项**
+1. 每 `new` 一个按钮，就要使用：
+    - `setFont()`
+
+
 **事件监听**
 
 `button.addActionListener()` 方法
 
-## TextField 文本框
+## `TextField` 文本框
 
 `java.awt.TextField` 类
+
+**方法**
+1. `setFont()`
 
 **事件监听**
 
@@ -157,11 +186,28 @@ Button button = new Button(String title);
 
 ## 画笔
 
-java.awt.Frame.paint()方法，这个方法需要传入一个Graphics对象，是用这个对象来实现各种切换颜色什么的。
+`java.awt.Frame.paint()`
 
-## 鼠标监听
+需传入一个 `Graphics` 对象，用该对象实现绘图。
 
-适配器模式：因为你想用一个接口就得重写他里面的所有方法，这时候会有一个这个接口的适配器类（就是个类，只不过我们叫他适配器），一般是接口名称后面加上一个Apapter就是了，这个类实现了接口里面的所有方法，但是实现的是空方法，但是你继承这个类的时候就不用重写全部方法了，你可以只重写你需要的方法就行了。
+**Graphics 中的方法**
+1. `setColor()`
+2. `fillOval()`
+2. `fillRect()`
+2. `drawLine()`
+3. `repaint()`
+
+`fill` 系列和 `draw` 系列的方法的区别就是图形是实心和空心得区别
+
+
+**注意事项**
+1. 每次使用 `Graphics` 对象都要使用 `setColor()` 和 `repaint()`（最后） 方法
+1. 重写 `Frame` 的 `paint()` 方法，在 `paint()` 里面操作 `Graphics` 对象实现绘图。
+2. `setVisible()` 和 `repaint()` 的区别
+    - `setVisible()`：因为组件被新建的时候，是默认不可见的，就需要把 `frame.setVisible(true)` 一下。
+    - `repaint()`：当你的GUI组件的显示内容需要更新时，例如，如果你的程序包含一个绘图组件，用户可以通过鼠标来改变绘图，那么每次鼠标事件发生时，你可能就需要调用另一个例子是，如果你的程序有一个显示动态数据（如实时股票价格）的组件，你可能需要定期调用 `repaint()` 来更新显示的数据
+
+**案例：画图工具**
 
 鼠标监听事件：因为鼠标（比如单击, 英文叫press）的对象是窗口（如果是针对画图工具的话），那么就是 e.getResource()返回的是Frame对象，可以得到你点击的x，y坐标
 
@@ -173,18 +219,27 @@ java.awt.Frame.paint()方法，这个方法需要传入一个Graphics对象，�
 
 然后不能只画一次，要每次都刷新，再调用frame.repaint()方法
 
-问题：paint方法怎么没调用就能画东西，好好去看看paint方法的文档。
+**注意： `repaint()` 的实现就是重新调用 `paint()` 方法，绝对不能在 `paint()` 里面调用 `repaint()` 方法，程序程序会一直调用 `paint()`, 陷入无限循环**
+
+## 鼠标监听
+
+`addMouseListener()` 方法
+
+**注意事项**
+1. 各个容器都可以有鼠标监听事件，只要调用这个容器的 `addMouseListener()` 方法即可
+2. 该方法传入 `MouseEvent` 参数，使用 `e.getX()` 和 `e.getY()` 获取点击位置的坐标
 
 ## 窗口监听事件
 
-去看WindowApadter的源码，有几个方法
+`addWindowListner()`
+
+同鼠标监听事件。
 
 ## 键盘监听事件
 
-用Frame里面的addKeyListener方法，可以自己写类继承Frame去用这个方法，也可以直接对frame对象使用。
+`addKeyListener()`
 
-传入KeyAdapter对象，有一个方法，keyPressed，需要传入一个KeyEvent 对象，但是似乎不要我们传入，去看看源码是怎么回事？
-
+同鼠标监听事件。
 
 # Swing
 
@@ -313,3 +368,9 @@ JTextArea
 # 小结
 
 以上这些内容对你理解后面的东西是有帮助的，以后这块的内容会搬到前端
+
+# 其他知识小点
+
+1. 适配器模式
+    
+    因为你想用一个接口就得重写他里面的所有方法，这时候会有一个这个接口的适配器类（就是个类，只不过我们叫他适配器），一般是接口名称后面加上一个Apapter就是了，这个类实现了接口里面的所有方法，但是实现的是空方法，但是你继承这个类的时候就不用重写全部方法了，你可以只重写你需要的方法就行了。
