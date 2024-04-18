@@ -221,7 +221,15 @@ Button button = new Button(String title);
 
 **注意： `repaint()` 的实现就是重新调用 `paint()` 方法，绝对不能在 `paint()` 里面调用 `repaint()` 方法，程序程序会一直调用 `paint()`, 陷入无限循环**
 
-## 鼠标监听
+## 监听事件
+
+给一个组件添加监听事件，使用 `add` 系列的命令，所谓添加监听事件，就要给这个 `add` 命令传入一个监听事件（即对应事件的 `Listener`，如窗口监听（`WindowListener`）对应的监听器就是 `WindowListener`），然后要传的时候，会发现，各种 `Listener` 都是接口，那么就要实现接口，于是有了适配器模式，出现各种 `Adapter`，但是这些 `Adapter` 里面实现接口的方法都是空的，要我们自己实现，那我们就需要自己继承这个 `Adapter`类，实现里面的方法。最后，实现方法的时候当然需要传入一个事件来实现它。
+
+**为什么不直接自己写类实现接口，而是要去继承适配器？**
+
+因为继承适配器不需要把接口里面的方法全部重写，只需重写你需要的即可。
+
+### 鼠标监听
 
 `addMouseListener()` 方法
 
@@ -229,13 +237,13 @@ Button button = new Button(String title);
 1. 各个容器都可以有鼠标监听事件，只要调用这个容器的 `addMouseListener()` 方法即可
 2. 该方法传入 `MouseEvent` 参数，使用 `e.getX()` 和 `e.getY()` 获取点击位置的坐标
 
-## 窗口监听事件
+### 窗口监听事件
 
 `addWindowListner()`
 
 同鼠标监听事件。
 
-## 键盘监听事件
+### 键盘监听事件
 
 `addKeyListener()`
 
