@@ -18,13 +18,13 @@
 
 做完就可以用来做外挂
 
-## 简介
+# 简介
 
 Gui的核心技术： Swing  AWT  是GUI的核心编程工具，现在不流行，因为不美观，还需要我们的jre环境! 太大了!
 
 为什么我们要学习，因为他是MVC的基础，可以写出自己心中想要的小工具，工作的时候也可能维护到swing界面，概率极小，主要是为了了解MVC架构，了解监听!
 
-## AWT
+# AWT
 
 abstract windows toolkit
 
@@ -32,7 +32,7 @@ abstract windows toolkit
 
 <img src="pic/awtComponent.png" alt="component of awt frameword" width=300 />
 
-### `Frame` 窗口
+## `Frame` 窗口
 
 `java.awt.Frame` 类
 
@@ -76,7 +76,7 @@ abstract windows toolkit
 1. `setBounds()` 等效于 `setLocation()` + `setSize()`;
 1. 要使用 `setBounds()` ，请将`frame.setLayout(null)`， 如果您使用各种布局，则 `setBounds()` 将不起作用
 
-### 布局管理器
+## 布局管理器
 
 **FlowLayout**
 
@@ -136,7 +136,7 @@ frame.add(component)
 3. 很重要的一点还有：`panel` 里面的组件的 `setBounds()` 的时候的坐标也是相对 `frame` 的左上角的坐标！
 5. `setBounds()` 的前两个参数，是指当前容器或组件，左上角坐标相对于 **该组件所在的容器** 左上角坐标差多少。
 
-### `Button` 按钮
+## `Button` 按钮
 
 `java.awt.Button` 类
 
@@ -251,13 +251,35 @@ Button button = new Button(String title);
 
 # Swing
 
-## 窗口、面板
+## 窗口
 
-JFrame 类
+`JFrame` 
 
-窗口关闭事件被封装了：setDefaultCloseOperation(WindowConstants.里面有些参数)
+**构造**
+1. 空参
+2. `new JFrame frame = new JFrame(String title)`
+
+**注意事项**
+1. 每次新建一个 `jframe` 就要用的那些方法和 `frame` 一样
+2. 不用 `addWindowListener()`，用 `setDefaultCloseOperation()`
+3. 使用 `jframe.add()` 和 `jframe.getContentPane().add()`：
+
+    在 `Java Swing` 编程中，`frame.add(component)` 和 `frame.getContentPane().add(component)` 这两种方式都可以用来向 `JFrame` 添加组件。但是，它们的使用场景和效果可能会有所不同。
+    - `frame.add(component)`：这是一种更简洁的方式，直接向 `JFrame` 添加组件。实际上，当你调用 `frame.add(component)` 时，你是在向 `JFrame` 的内容面板添加组件，因为 `JFrame` 的 `add()` 方法已经被重写，以便将组件添加到内容面板。这种方式适用于大多数常见的情况，特别是当你只需要添加少量的组件时。
+    - `frame.getContentPane().add(component)`：这种方式提供了更多的灵活性，允许你直接操作 `JFrame` 的内容面板。这种方式适用于更复杂的情况，例如，当你需要替换整个内容面板，或者需要对内容面板进行更详细的定制时。例如，你可以创建一个自定义的 `JPanel`，然后使用 `frame.setContentPane(myPanel)` 来替换整个内容面板。
+    总的来说，`frame.add(component)` 和 `frame.getContentPane().add(component)` 这两种方式都可以用来向 `JFrame` 添加组件，选择哪种方式取决于你的具体需求。希望这个解释对你有所帮助！
+
+### 布局管理器
+
+
+
+
 
 ### Container
+
+总之就是，相比于 `Frame`，`JFrame` 默认有了一个 `Panel`，不会让你直接把东西加到 `frame` 上了，然后 `JFrame` 对象的 `add` 也是被重写了，你直接 `add` 是加到了 `content pane` 里去了。
+
+还有很重要的一点就是，`jFrame.setBackground()` 不起作用了，理由就是上面的那段，需要 `jFrame.getContentPane().setBackground()` 才会得到你想要的效果。
 
 **与 awt 不同的地方：frame 设置颜色设置的是 Container 的颜色，所以通过 JFrame.getContentPane() 得到容器，用 Container 对象接收**
 
@@ -266,15 +288,15 @@ JFrame 类
 然后，要在 JFrame 里面放东西，都是放在 Container 里面，如 button, label 等等 
 
 
-## Dialog 对话窗口（弹窗）
+## `Dialog` 对话窗口（弹窗）
 
 明确一点的是：对话窗口也是一个 Frame 或者说 JFrame
 
 但是弹窗用的是 JDialog 类了，不是 JFrame，可以去源码看看 JDialog 类是个什么情况，其实他里面用的东西都是 JFrame 的东西。
 
 **注意**
-
-1. JDialog 里面自动封装了 setDefaultCloseOperation(WindowConstants.里面有些参数) 方法，你就不用给它加了。
+1. `JDialog` 自动封装了 `setDefaultCloseOperation()` 方法，不用给它加了，加了会报错。
+2. `JDialog` 就是 `JFrame`，请把它当作 `JFrame` 对待，即那些一定义对象就要写好的方法，使用 `JDialog` 也要。
 
 ## JLabel
 
@@ -299,7 +321,7 @@ Icon 可以放在 Label 上，也可以放在 JButton 上
 `Class.class.getResource("文件名")`
 
 
-## JPanela 面板
+## JPanel 面板
 
 用 JPanel 类
 
