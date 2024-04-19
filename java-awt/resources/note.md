@@ -298,7 +298,7 @@ Button button = new Button(String title);
 1. `JDialog` 自动封装了 `setDefaultCloseOperation()` 方法，不用给它加了，加了会报错。
 2. `JDialog` 就是 `JFrame`，请把它当作 `JFrame` 对待，即那些一定义对象就要写好的方法，使用 `JDialog` 也要。
 
-## JLabel
+## `JLabel`
 
 JLabel 对应 awt 里面的 Label 类
 
@@ -308,20 +308,30 @@ JLabel 对应 awt 里面的 Label 类
 
 JLabel label = new JLabel("");
 
-## Icon 图标
+## `Icon` 图标
 
-Icon 可以放在 Label 上，也可以放在 JButton 上
+`ImageIcon` 接收图片的地址，一般设置在 `JLabel` 或 `JButton` 上
 
-还有 ImageIcon，把图片作为图标
-
-然后要把 icon 放在标签上，可以用 Label 的构造，也可以用Label.setIcon方法。
-
-**注意**
-通过类可以获得这个类同级目录下的东西：
+**注意事项**
+1. 要把 `icon` 放在标签上
+    - 用 `JLabel` 的构造
+    - 用 `JLabel.setIcon()` 方法
+    
+2. 其实应该是 `Icon` 接口，但是由于是接口，所以用实现类 `ImageIcon`
+3. `Icon` 可以放在 `JLabel` 上，也可以放在 `JButton` 上
+4. 通过类可以获得这个类同级目录下的东西：
 `Class.class.getResource("文件名")`
+1. `Label` 不能设置图标，`JLabel` 可以
+1. `ImageIcon` 不提供图片缩放的方法的解决办法：
+    
+    在将图片添加到ImageIcon之前，先对图片进行缩放（使用 `Image` 类的 `getScaledInstance()` 方法）
+    ```java
+    Image originalImage = new ImageIcon("path/to/your/image.jpg").getImage();
+    Image scaledImage = originalImage.getScaledInstance(newWidth, newHeight, Image.SCALE_DEFAULT);
+    ImageIcon scaledIcon = new ImageIcon(scaledImage);
+    ```
 
-
-## JPanel 面板
+## `JPanel` 面板
 
 用 JPanel 类
 
