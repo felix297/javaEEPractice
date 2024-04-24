@@ -391,22 +391,26 @@ JLabel 对应 awt 里面的 Label 类
 ### 列表框
 `JList`
 
-可以在构造的时候传入一个 String[]
+可以在构造的时候传入一个 `String[]`
 
-直接就得到了这个 String[] 表示的列表
+直接就得到了这个 `String[]` 表示的列表
 ## 文本框
+
+`JTextField`：用于输入和编辑单行文本的组件。它是最常用的文本输入组件，通常用于收集如用户名或搜索查询等简短的、单行的输入。
+`JPasswordField`：专门用于密码输入的文本字段。它的功能与 JTextField 类似，但输入的文本会被遮蔽，通常显示为点或星号，以保护密码的隐私。
+`JTextArea`：用于输入和编辑多行文本的组件。它通常用于收集需要多行输入的信息，如地址、描述或者段落等。
 
 ### 文本框
 
-JTextField
+`JTextField`
 
 ### 密码框
 
-JPasswordField
+`JPasswordField`
 
 ### 文本域
 
-JTextArea
+`JTextArea`
 
 # 小结
 
