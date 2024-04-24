@@ -94,6 +94,14 @@ frame.add(component, BorderLayout.***);
 ```
 
 **GridLayout**
+
+有两个构造：
+1. `new GridLayout(2, 2);`
+1. `new GridLayout(2, 2, 10, 10);`
+    第一个 `10` 是 `hgap`
+    第二个 `10` 是 `vgap`
+
+
 ```java
 Frame frame = new Frame();
 frame.setLayout(new GridLayout(int row, int column));
@@ -199,6 +207,10 @@ Button button = new Button(String title);
 
 `fill` 系列和 `draw` 系列的方法的区别就是图形是实心和空心得区别
 
+**为什么重写了 `paint()` 方法之后，新建一个 `frame` 就能直接得到重写的内容**
+
+<img src="../resources/pic/paintAutoDrawing.png" width=500/>
+
 
 **注意事项**
 1. 每次使用 `Graphics` 对象都要使用 `setColor()` 和 `repaint()`（最后） 方法
@@ -268,6 +280,13 @@ Button button = new Button(String title);
     - `frame.add(component)`：这是一种更简洁的方式，直接向 `JFrame` 添加组件。实际上，当你调用 `frame.add(component)` 时，你是在向 `JFrame` 的内容面板添加组件，因为 `JFrame` 的 `add()` 方法已经被重写，以便将组件添加到内容面板。这种方式适用于大多数常见的情况，特别是当你只需要添加少量的组件时。
     - `frame.getContentPane().add(component)`：这种方式提供了更多的灵活性，允许你直接操作 `JFrame` 的内容面板。这种方式适用于更复杂的情况，例如，当你需要替换整个内容面板，或者需要对内容面板进行更详细的定制时。例如，你可以创建一个自定义的 `JPanel`，然后使用 `frame.setContentPane(myPanel)` 来替换整个内容面板。
     总的来说，`frame.add(component)` 和 `frame.getContentPane().add(component)` 这两种方式都可以用来向 `JFrame` 添加组件，选择哪种方式取决于你的具体需求。希望这个解释对你有所帮助！
+4. `jFrame.add(panel)` 和 `jFrame.getContentPane().add(panel)` 实际上都是在向同一个容器—— `JFrame` 的内容面板（content pane）——添加 `panel` 组件。
+
+    当你调用 `jFrame.add(panel)` 时，你实际上是在向 `JFrame` 的内容面板添加组件，因为 `JFrame` 的 `add()` 方法已经被重写，以便将组件添加到内容面板。
+    
+    而当你调用 `jFrame.getContentPane().add(panel)` 时，你是直接向 `JFrame` 的内容面板添加组件。
+    
+    所以，这两行代码实际上是在做同样的事情。
 
 ### 布局管理器
 
