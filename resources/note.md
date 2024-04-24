@@ -325,8 +325,6 @@ JLabel 对应 awt 里面的 Label 类
 
 里面传入的是一个 int 类型，可以用 SwingConstants.各种方式
 
-JLabel label = new JLabel("");
-
 ## `Icon` 图标
 
 `ImageIcon` 接收图片的地址，一般设置在 `JLabel` 或 `JButton` 上
@@ -351,23 +349,19 @@ JLabel label = new JLabel("");
     ```
 
 ## `JPanel` 面板
+`JPanel` 类
 
-用 JPanel 类
+有个可以传 `Layout` 的构造。
+### JScrollPane 滚动条
+把一个组件放到 `JScrollPane` 对象里面去，就可以对其实现滚动条功能
 
-有个可以传 Layout 的构造，这里我们可以传入一个GridLayout。
-
-pannel 的 add 方法
-
-然后一个 pannel 对象可以 add 多少个东西是有 GridLayout 设定的布局数决定的。
+如把 JTextArea 对象放进去，当输入的内容超出了文本框的大小，就会出现滚动条。
 
 **注意**
-
-1. JFrame 返回的 Container 可以通过 GridLayout 传入一个水平间距和垂直间距的参数
-
-### JScrollPanel 滚动条
-
-它的一个构造就是把一个组件放进去，就可以对其实现滚动条功能，如把 JTextArea 对象放进去，当输入的内容超出了文本框的大小，就会出现滚动条。
-
+1. 这个构造，`JScrollPane​(Component view)`，才能把你的文本框加上滚动条，而不是 `jScrollPane.add()`
+2. `jScrollPane` 添加到 `frame` 就行了。
+    只是把文本框加到 `frame` 是不行的，而是要把套上 `JScrollPanel` 之后的对象添加到 `frame` 中去
+3. `TextArea(String defaultText, rows, column)` 中的 `rows` 和 `column` 是跟 `setBounds` 里面的尺度不是同一个单位等级，不要混肴。
 ## 按钮
 
 ### 普通按钮
