@@ -363,31 +363,26 @@ JLabel 对应 awt 里面的 Label 类
     只是把文本框加到 `frame` 是不行的，而是要把套上 `JScrollPanel` 之后的对象添加到 `frame` 中去
 3. `TextArea(String defaultText, rows, column)` 中的 `rows` 和 `column` 是跟 `setBounds` 里面的尺度不是同一个单位等级，不要混肴。
 ## 按钮
-
 ### 普通按钮
+`JButton`
 
-JButton， 他有一些方法可以去看看。
-
-JButton.setToolTipButton()就是你鼠标悬浮在按钮上会出现的文字提示。
-
+`JButton.setToolTipButton()` 鼠标悬浮在按钮上会出现的文字提示
 ### 单选按钮
+`JRadioButton()`
 
-JRadioButton()，在构造内可以给按钮的文本
+分组：
 
-可以 new 多个对象，然后对多个对象进行分组之后，然后同一组里面的按钮，只能选中一个按钮。
+`ButtonGroup`，使用 `add` 方法把组员加进来
 
-那么就有一个组对象，ButtonGroup，使用 add 方法把组员加进来
+同一组里面的按钮，只能选中一个
 
 **注意**
  
-1. 最后使用 container add组件的时候不用把 ButtonGroup 对象add，add JRadioButton 对象就行了
-
+1. 最后使用 `container` 添加组件的时候不用添加 `ButtonGroup` 对象，添加 `JRadioButton` 对象就行了
 ### 复选按钮
+`JCheckBox`
 
-JCheckBox
-
-直接new 出多个JCheckBox对象，把这些按钮add到container里面去，就是一组复选按钮了，不用分组。
-
+没有分组的概念：可以这样理解，每个复选按钮都是自成一组的，都可以选上或不选上。
 ## 列表
 
 ### 下拉框
