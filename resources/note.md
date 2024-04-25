@@ -421,3 +421,7 @@ JLabel 对应 awt 里面的 Label 类
 1. 适配器模式
     
     因为你想用一个接口就得重写他里面的所有方法，这时候会有一个这个接口的适配器类（就是个类，只不过我们叫他适配器），一般是接口名称后面加上一个Apapter就是了，这个类实现了接口里面的所有方法，但是实现的是空方法，但是你继承这个类的时候就不用重写全部方法了，你可以只重写你需要的方法就行了。
+
+
+R-squared (R²): It ranges from 0 to 1, where 0 indicates that the model does not explain any variability, and 1 indicates that it explains all the variability. Higher R-squared values suggest a better fit, but it doesn’t necessarily mean the model is a good predictor in an absolute sense2. One limitation of R-squared is that it tends to increase as more variables are added to the model, even if they don’t improve the model significantly.
+Adjusted R-squared: This measure addresses a limitation of R-squared, especially in multiple regression (models with more than one independent variable). While R-squared tends to increase as more variables are added to the model (even if they don’t improve the model significantly), Adjusted R-squared penalizes the addition of unnecessary variables. It considers the number of predictors in the model and adjusts R-squared accordingly. This adjustment helps to avoid overfitting, providing a more accurate measure of the model’s goodness of fit.
