@@ -2,6 +2,16 @@ package com.company;
 
 import java.util.ArrayList;
 
+/**
+ * @author rogger
+ * @since 2024.7.17
+ * @version 1.0
+ * {@code
+ *
+ *
+ * }
+ *
+ */
 public class Hello {
     public static void main (String[] args) {
 //        int count = 0;
@@ -22,10 +32,19 @@ public class Hello {
 
     }
 
+    /**
+     * print Hello! when invoke this method
+     */
     public static void sayHello () {
         System.out.println("Hello!");
     }
 
+    /**
+     * this method add up two numbers and return the sum of these two number
+     * @param number1 the first number to be add
+     * @param number2 the second number to be add
+     * @return the result of number1 + number2
+     */
     public static int sum (int number1, int number2) {
         return number1 + number2;
     }
