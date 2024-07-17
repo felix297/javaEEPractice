@@ -10,6 +10,12 @@ public class Hello {
 //            count++;
 //        } while (count < 100);
 
+
+        /*
+        * the multiple line comment
+        * used for comment more than one line
+        * */
+
         int number1 = 100;
         int number2 = 200;
         System.out.println("sum = " + sum(number1, number2));
