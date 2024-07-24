@@ -1,10 +1,13 @@
 package com.company;
 
+import java.util.stream.Stream;
+import java.util.stream.IntStream;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
 public class StringPractice {
     public static void main (String[] args) throws UnsupportedEncodingException {
+        // constructor
         String str = "hello";
         String str1 = new String();
         String str2 = new String(new byte[]{65, 97});
@@ -21,7 +24,28 @@ public class StringPractice {
 
         String str11 = new String(stringBuffer);
         String str12 = new String(stringBuilder);
-        System.out.println(str11.hashCode() == stringBuffer.hashCode());
-        System.out.println(str12.hashCode() == stringBuilder.hashCode());
+//        System.out.println(str11.hashCode() == stringBuffer.hashCode());
+//        System.out.println(str12.hashCode() == stringBuilder.hashCode());
+
+        // method
+        // charAt
+        System.out.println(str.charAt(1));
+        for (int index = 0; index < str.length(); index++) {
+            System.out.print(str.charAt(index));
+        }
+        System.out.println();
+
+        // chars
+        IntStream intStream = str.chars();
+
+        // IntStream usage 1: print the content
+//        intStream.forEach(System.out::println);
+//        intStream.forEach((ele) -> System.out.print((char)ele));
+
+        // IntStream usage 2: filter
+//        intStream.filter(Character::isLetter).forEach((ele) -> System.out.print((char)ele));
+        System.out.println(intStream.filter(ele -> ele == 'l').count());
+
+
     }
 }
