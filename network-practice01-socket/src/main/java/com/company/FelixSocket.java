@@ -76,6 +76,60 @@ public class FelixSocket {
 //        InetAddress address1 = InetAddress.getByAddress("www.tom.com", new byte[]{1,1,1,1});
 //        System.out.println(address1.isLoopbackAddress());
 
+//        isMCGlobal()
+//        InetAddress address = InetAddress.getByAddress(new byte[]{(byte)224, 0,1,0}); // 224.0.1.0 到 238.255.255.255：用于全球范围的多播。
+//        System.out.println(address.isMCGlobal());
+
+//        isMCLinkLocal()
+//        InetAddress address = InetAddress.getByName("ff05::1");
+//        System.out.println(address.isMCLinkLocal());
+//        System.out.println(address.isMCNodeLocal());
+//        System.out.println(address.isMCOrgLocal());
+//        System.out.println(address.isMCSiteLocal());
+//        System.out.println(address.isMulticastAddress());
+
+//        isSiteLocalAddress()
+//        InetAddress address = InetAddress.getByName("127.0.0.1");
+//        System.out.println(address.isLoopbackAddress());
+//        System.out.println(address.isSiteLocalAddress());
+
+//        isReachable()
+//        InetAddress address = InetAddress.getByName("www.baidu.com");
+//        System.out.println(address.isReachable(10000));
+//        System.out.println(address.isReachable(null, 1, 1000));
+
+//        toString()
+//        InetAddress address = InetAddress.getByName("localhost");
+//        System.out.println(address.toString());
+//        System.out.println(address.getHostAddress());
+//        System.out.println(InetAddress.getLocalHost());
+
+//        二、InetSocketAddress
+//        1. contructor
+//        InetSocketAddress socketAddress = new InetSocketAddress(9999);
+//        InetSocketAddress socketAddress1 = new InetSocketAddress("localhost", 9999);
+//        InetAddress ip = InetAddress.getByName("localhost");
+//        InetSocketAddress socketAddress2 = new InetSocketAddress(ip, 9999);
+
+//        2. method
+//        InetSocketAddress.createUnresolved()
+//        InetSocketAddress socketAddress = InetSocketAddress.createUnresolved("www.tom.com", 9999);
+//        System.out.println(socketAddress.getHostName());
+//        System.out.println(socketAddress.getAddress().getHostAddress());
+
+//        getAddress()
+//        InetSocketAddress address = new InetSocketAddress("127.0.0.1", 9999);
+//        System.out.println(address.getAddress().getHostAddress());
+
+//        getHostName()
+//        InetSocketAddress address = new InetSocketAddress(InetAddress.getByAddress("www.baidu.com", new byte[]{127,0,0,1}), 9999);
+//        System.out.println(address.getHostName());
+//        System.out.println(address.getHostString());
+//        System.out.println(address.getPort());
+//        System.out.println(address.isUnresolved());
+//        System.out.println(address.toString());
+
+
 //        1. contructor
 //        InetAddress local = InetAddress.getByName("localhost");
 //        Socket port1001 = new Socket("localhost", 9999);
