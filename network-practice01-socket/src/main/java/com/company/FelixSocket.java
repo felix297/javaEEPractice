@@ -1,5 +1,6 @@
 package com.company;
 
+import java.io.InputStream;
 import java.net.SocketAddress;
 import java.net.Proxy;
 import java.net.InetAddress;
@@ -10,7 +11,7 @@ import java.net.Socket;
 
 
 public class FelixSocket {
-    public static void main (String[] args) throws IOException {
+    public static void main (String[] args) {
 //        一、InetAddress
 //        1. contructor: non
 
@@ -129,7 +130,7 @@ public class FelixSocket {
 //        System.out.println(address.isUnresolved());
 //        System.out.println(address.toString());
 
-
+//        三、Socket
 //        1. contructor
 //        InetAddress local = InetAddress.getByName("localhost");
 //        Socket port1001 = new Socket("localhost", 9999);
@@ -140,13 +141,36 @@ public class FelixSocket {
 
 //        2. method
 //        bind()
-//        Socket client = new Socket("localhost", 9999);
-//        SocketAddress address = client.getRemoteSocketAddress();
 
-//        Socket client2 = new Socket();
-//        client2.bind(address);
-//        System.out.println(client.getPort());
+        Socket localP = null;
+        OutputStream output = null;
+        InputStream input = null;
+        try {
+            localP = new Socket();
+//            InetSocketAddress localAddr = new InetSocketAddress("localhost", 1002);
+            InetSocketAddress remoteAddr = new InetSocketAddress("localhost", 9888);
+//            localP.bind(localAddr); // bind() 似乎会在你短时间内多次 bind 的时候被占用端口，即 1002 端口没有那么快被释放，即你的 Socket bind 了一个端口之后，即使你的 Socket 被close了，端口可能也没有被释放
+            localP.connect(remoteAddr, 1000);
 
+            output = localP.getOutputStream();
+            input = localP.getInputStream();
+            byte[] msg = ("hello, this is " + localP.getLocalAddress() + " speaking...").getBytes();
+            output.write(msg);
+            output.flush();
 
+            int ch;
+            while ((ch = input.read()) != -1) {
+                System.out.print((char) ch);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                localP.close();
+                output.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }

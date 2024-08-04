@@ -9,7 +9,7 @@ import java.net.ServerSocket;
 public class FelixServer {
     public static void main (String[] args) {
         try {
-            ServerSocket server = new ServerSocket(9999);
+            ServerSocket server = new ServerSocket(9888);
             while (true) {
                 Socket socket = server.accept();
                 InputStream inputStream = socket.getInputStream();
@@ -19,10 +19,10 @@ public class FelixServer {
                     System.out.print((char)res);
                     outputStream.write(res);
                 }
+                System.out.println();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 }
