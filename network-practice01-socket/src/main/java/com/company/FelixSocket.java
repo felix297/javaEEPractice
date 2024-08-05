@@ -1,5 +1,6 @@
 package com.company;
 
+import java.net.StandardSocketOptions;
 import java.io.InputStream;
 import java.net.SocketAddress;
 import java.net.Proxy;
@@ -11,7 +12,7 @@ import java.net.Socket;
 
 
 public class FelixSocket {
-    public static void main (String[] args) {
+    public static void main (String[] args) throws IOException {
 //        一、InetAddress
 //        1. contructor: non
 
@@ -141,36 +142,176 @@ public class FelixSocket {
 
 //        2. method
 //        bind()
+//        Socket localP = new Socket();
+//
+//        InetSocketAddress localAddr = new InetSocketAddress("localhost", 1002);
+//        localP.bind(localAddr); // bind() 似乎会在你短时间内多次 bind 的时候被占用端口，即 1002 端口没有那么快被释放，即你的 Socket bind 了一个端口之后，即使你的 Socket 被close了，端口可能也没有被释放
+//
+//        InetSocketAddress remoteAddr = new InetSocketAddress("www.baidu.com", 80);
+//        localP.connect(remoteAddr, 1000);
 
-        Socket localP = null;
-        OutputStream output = null;
-        InputStream input = null;
-        try {
-            localP = new Socket();
-//            InetSocketAddress localAddr = new InetSocketAddress("localhost", 1002);
-            InetSocketAddress remoteAddr = new InetSocketAddress("localhost", 9888);
-//            localP.bind(localAddr); // bind() 似乎会在你短时间内多次 bind 的时候被占用端口，即 1002 端口没有那么快被释放，即你的 Socket bind 了一个端口之后，即使你的 Socket 被close了，端口可能也没有被释放
-            localP.connect(remoteAddr, 1000);
+//        close()
+//        Socket client = new Socket("www.baidu.com", 80);
+//        client.close();
 
-            output = localP.getOutputStream();
-            input = localP.getInputStream();
-            byte[] msg = ("hello, this is " + localP.getLocalAddress() + " speaking...").getBytes();
-            output.write(msg);
-            output.flush();
+//        connect()
+//        Socket client = new Socket();
+//        InetSocketAddress baiduServer = new InetSocketAddress("www.baidu.com", 80);
+//        client.connect(baiduServer);
+//        client.close();
 
-            int ch;
-            while ((ch = input.read()) != -1) {
-                System.out.print((char) ch);
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                localP.close();
-                output.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
+//        Socket client2 = new Socket();
+//        InetSocketAddress bjtuServer = new InetSocketAddress("www.bjtu.edu.cn", 80);
+//        client2.connect(bjtuServer, 300);
+//        client2.close();
+
+//        getInetAddress()
+//        Socket client = new Socket("www.baidu.com", 80);
+//        System.out.println(client.getInetAddress().toString());
+//        client.close();
+
+//        getInputStream()
+//        Socket client = new Socket("www.baidu.com", 80);
+//        InputStream input = client.getInputStream();
+//        int ch;
+//        while ((ch = input.read()) != -1) {
+//            System.out.println((char)ch);
+//        }
+//        client.close();
+
+//        getKeepAlive()
+//        Socket client = new Socket("www.google.com", 80);
+//        System.out.println(client.getKeepAlive());
+//        client.setKeepAlive(true);
+//        System.out.println(client.getKeepAlive());
+//        client.close();
+
+//        getLocalAddress()
+//        Socket client = new Socket("www.google.com", 80);
+//        System.out.println(client.getLocalAddress().getHostName());
+//        System.out.println(client.getLocalPort());
+//        client.close();
+
+//        Socket client = new Socket();
+//        InetSocketAddress localAddress = new InetSocketAddress("localhost", 9999);
+//        InetSocketAddress remoteAddress = new InetSocketAddress("www.google.com", 80);
+//        client.bind(localAddress);
+//        client.connect(remoteAddress);
+//        System.out.println(client.getLocalAddress());
+//        System.out.println(client.getLocalPort());
+//        client.close();
+
+//        getLocalSocketAddress() 相当于 getLocalAddress() 和 getLocalPort() 的组合体
+//        Socket client = new Socket("www.baidu.com", 80);
+//        InetSocketAddress remoteAddress = (InetSocketAddress) client.getLocalSocketAddress();
+//        System.out.println(remoteAddress.getHostName() + remoteAddress.getPort());
+//        client.close();
+
+//        getOOBIine()
+//        Socket client = new Socket("www.baidu.com", 80);
+//        System.out.println(client.getOOBInline());
+//        client.close();
+//        Socket client = new Socket("www.baidu.com", 80);
+//        client.setOOBInline(true);
+//        System.out.println(client.getOOBInline());
+//        client.close();
+
+//        getOption()
+//        Socket client = new Socket("www.baidu.com", 80);
+//        System.out.println(client.getOption(StandardSocketOptions.SO_KEEPALIVE));
+//        System.out.println(client.getOption(StandardSocketOptions.SO_RCVBUF));
+//        client.close();
+
+//        getOutputStream()
+//        Socket client = new Socket("localhost", 9888);
+//        OutputStream output = client.getOutputStream();
+//        output.write("hello!".getBytes());
+//        client.close();
+
+//        getReceiveBufferSize()
+//        Socket client = new Socket("localhost", 9888);
+//        System.out.println(client.getReceiveBufferSize());
+//        client.close();
+
+//        getRemoteSocketAddress()
+//        InetAddress remote = InetAddress.getByName("www.baidu.com");
+//        Socket client = new Socket(remote, 80);
+//        System.out.println(client.getRemoteSocketAddress());
+//        client.close();
+
+//        getReuseAddress()
+//        InetAddress remote = InetAddress.getByName("www.baidu.com");
+//        Socket client = new Socket(remote, 80);
+//        System.out.println(client.getReuseAddress());
+//        client.close();
+
+//        setReuseAddress()
+//        InetAddress remote = InetAddress.getByName("www.baidu.com");
+//        Socket client = new Socket(remote, 80);
+//        System.out.println(client.getReuseAddress());
+//        client.setReuseAddress(true);
+//        System.out.println(client.getReuseAddress());
+//        client.close();
+
+//        getSendBuffSize()
+//        InetAddress remote = InetAddress.getByName("www.baidu.com");
+//        Socket client = new Socket(remote, 80);
+//        System.out.println(client.getSendBufferSize());
+//        client.setSendBufferSize(100000);
+//        System.out.println(client.getSendBufferSize());
+//        client.close();
+
+//        getSoLinger()
+//        InetAddress remote = InetAddress.getByName("www.baidu.com");
+//        Socket client = new Socket(remote, 80);
+//        System.out.println(client.getSoLinger());
+//        client.setSoLinger(true, 10);
+//        System.out.println(client.getSoLinger());
+//        client.close();
+
+//        getSoTimeout()
+//        InetAddress remote = InetAddress.getByName("www.baidu.com");
+//        Socket client = new Socket(remote, 80);
+//        System.out.println(client.getSoTimeout());
+//        client.setSoTimeout(10);
+//        System.out.println(client.getSoTimeout());
+//        client.close();
+
+//        isBound()
+//        InetSocketAddress local = new InetSocketAddress(9888);
+//        InetSocketAddress remote = new InetSocketAddress("www.baidu.com",2009);
+//        Socket client = new Socket();
+//        System.out.println(client.isBound());
+//        client.bind(local);
+//        System.out.println(client.isConnected());
+//        client.connect(remote);
+//        System.out.println(client.isConnected());
+//        System.out.println(client.isBound());
+//        client.close();
+//        System.out.println(client.isClosed());
+
+//        isInputShutdown()
+//        InetAddress remote = InetAddress.getByName("www.baidu.com");
+//        Socket client = new Socket(remote, 80);
+//        InputStream input = client.getInputStream();
+//        System.out.println(client.isInputShutdown());
+//        input.close();
+//        System.out.println(client.isInputShutdown());
+//        System.out.println(client.isClosed());
+//        client.close();
+
+//        getTcpNoDelay()
+//        Socket client = new Socket ("www.baidu.com", 80);
+//        System.out.println(client.getTcpNoDelay());
+//        client.setTcpNoDelay(true);
+//        System.out.println(client.getTcpNoDelay());
+//        client.close();
+
+//        getTrafficClass()
+//        Socket client = new Socket("www.baidu.com", 80);
+//        System.out.println(client.getTrafficClass());
+//        client.setTrafficClass(0x10);
+//        System.out.println(client.getTrafficClass());
+//        client.close();
     }
 }
