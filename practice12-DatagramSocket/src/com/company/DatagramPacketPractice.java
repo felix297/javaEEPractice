@@ -25,6 +25,38 @@ public class DatagramPacketPractice {
 //        socket.bind(local);
 //        System.out.println(socket.getLocalSocketAddress());
 
+//        2. method()
+//        bind()
+//        connect()
+//        disconnect()
+//        close()
+//        DatagramSocket socket = new DatagramSocket(null);
+//        InetSocketAddress local = new InetSocketAddress("localhost", 9999);
+//        InetSocketAddress remote = new InetSocketAddress("localhost", 9998);
+//        socket.bind(local);
+//        socket.connect(remote);
+//        System.out.println(socket.getInetAddress());
+//        System.out.println(socket.getBroadcast());
+//        socket.disconnect();
+//        System.out.println(socket.isConnected());
+//        socket.close();
+//        System.out.println(socket.isClosed());
+
+//        getInetAddress()
+        DatagramSocket socket = new DatagramSocket(null);
+        InetSocketAddress local = new InetSocketAddress("localhost", 9999);
+        InetSocketAddress remote = new InetSocketAddress("localhost", 9998);
+        socket.bind(local);
+        socket.connect(remote);
+        System.out.println(socket.getInetAddress());
+        System.out.println(socket.getLocalAddress());
+        System.out.println(socket.getLocalPort());
+        System.out.println(socket.getLocalSocketAddress());
+
+        System.out.println(socket.getRemoteSocketAddress());
+        System.out.println(socket.getPort());
+        System.out.println(socket.getInetAddress());
+
 
     }
 }
